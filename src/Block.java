@@ -54,10 +54,8 @@ public class Block {
     this.prevHash = prevHash;
     this.nonce = nonce;
     
-    String textToHash = "" + this.amountTransferred + (this.prevHash == null ? "" : prevHash.toString()) + nonce;
-    byte[] bytesToHash = textToHash.getBytes();
     try {
-      this.currHash = new Hash(bytesToHash);
+      makeHash();
     } catch (NoSuchAlgorithmException e) {
       e.printStackTrace();
     } // try-catch
