@@ -70,7 +70,7 @@ public class Block {
   */
   public int getNum() {
     return this.blockNum;
-  }
+  } // getNum()
 
   /* 
    * int getAmount(): 
@@ -78,7 +78,7 @@ public class Block {
   */
   public int getAmount() {
     return this.amountTransferred;
-  }
+  } // getAmount()
 
   /* 
    * long getNonce(): 
@@ -86,7 +86,7 @@ public class Block {
   */
   public long getNonce() {
     return this.nonce;
-  }
+  } // getNonce()
 
   /* 
    * Hash getPrevHash(): 
@@ -94,7 +94,7 @@ public class Block {
   */
   public Hash getPrevHash() {
     return this.prevHash;
-  }
+  } // getPrevHash()
 
   /* 
    * Hash getHash(): 
@@ -102,7 +102,7 @@ public class Block {
   */
   public Hash getHash() {
     return this.currHash;
-  }
+  } // getHash()
 
   /*
    * String toString(): 
@@ -113,7 +113,7 @@ public class Block {
     return String.format("Block %d (Amount: %d, Nonce: %d, prevHash: %s, hash: %s)",
                         this.blockNum, this.amountTransferred, this.nonce, 
                         this.prevHash.toString(), this.currHash.toString());
-  }
+  } // toString()
 
 
  
@@ -135,8 +135,11 @@ public class Block {
       } // if
       this.nonce++;
     } // while
-  } // mineBlock
+  } // mineBlock()
 
+  /* void makeHash()
+   * finds a valid hash and updates this.currHash
+  */
   private void makeHash() throws NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("sha-256");
 
@@ -152,7 +155,7 @@ public class Block {
       md.update(this.prevHash.getData());
     }
     this.currHash = new Hash(md.digest());
-  }
-}
+  } //makeHash()
+}// Block class
  
 
