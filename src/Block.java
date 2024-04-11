@@ -114,7 +114,15 @@ public class Block {
                         this.blockNum, this.amountTransferred, this.nonce, 
                         this.prevHash.toString(), this.currHash.toString());
   } // toString()
-
+ 
+  /* 
+   * isEqual(Block blk): 
+   * returns true if the hash of this.curHash and blk are equal
+   * otherwise false.
+  */
+  public boolean isEqual(Block blk) {
+    return this.currHash.equals(blk.getHash());
+  } //  boolean isEqual(Block blk)
 
  
   // +---------------------+---------------------------------------------------
