@@ -1,7 +1,6 @@
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 
 /**
@@ -112,7 +111,8 @@ public class Block {
   public String toString() {
     return String.format("Block %d (Amount: %d, Nonce: %d, prevHash: %s, hash: %s)",
                         this.blockNum, this.amountTransferred, this.nonce, 
-                        this.prevHash.toString(), this.currHash.toString());
+                        (this.prevHash == null) ? "" : this.prevHash.toString(),
+                        this.currHash.toString());
   } // toString()
  
   /* 

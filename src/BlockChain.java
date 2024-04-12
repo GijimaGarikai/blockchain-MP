@@ -1,8 +1,4 @@
 import java.io.PrintWriter;
-import java.nio.ByteBuffer;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.ArrayList;
 
 
@@ -12,7 +8,7 @@ import java.util.ArrayList;
  * @author Samuel A. Rebelsky
  * @author Garikai
  */
-public class BlockChain<T> {
+public class BlockChain {
   // +--------+----------------------------------------------------------
   // | Fields |
   // +--------+
