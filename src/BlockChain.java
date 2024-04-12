@@ -27,8 +27,7 @@ public class BlockChain {
    * field should be ignored when calculating the block’s own nonce and hash.
    */
   public BlockChain(int initialAmt) {
-    Block newBlock = new Block(this.blockNum++, initialAmt, null);
-    this.numBlocks++;
+    Block newBlock = new Block(this.numBlocks++, initialAmt, null);
     this.first = new Node(newBlock);
     this.last = this.first;
   } // BlockChain(int initialAmt)
@@ -44,7 +43,7 @@ public class BlockChain {
    * The returned Block should be valid to add onto this chain.
    */
   public Block mine(int amount){
-    Block currBlock = new Block(this.blockNum++, amount, this.last.data.getHash());
+    Block currBlock = new Block(this.numBlocks, amount, this.last.data.getHash());
     return currBlock;
   } // mine(int amount)
  
@@ -62,7 +61,8 @@ public class BlockChain {
    * inappropriate for the contents, or because the previous hash is incorrect).
    */
   public void append(Block blk) throws IllegalArgumentException{
-    if(!blk.getHash().isValid()) {
+    // ensure valid hash and valid transaction amount
+    if(!blk.getHash().isValid() || this.getBalance() < -blk.getAmount()) { 
       throw new IllegalArgumentException();
     }
     Node newNode = new Node(blk);

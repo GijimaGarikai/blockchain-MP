@@ -79,7 +79,11 @@ public class BlockChainDriver {
           pen.println("Nonce? ");
           long nonce = Long.parseLong(eyes.nextLine());
           Block newBlock = new Block(blkchain.getSize(), amt1, blkchain.getHash(), nonce);
-          blkchain.append(newBlock);
+          try {
+            blkchain.append(newBlock);
+          } catch (Exception e) {
+            pen.println("Invalid Hash/Block");
+          }
           pen.println("\n");
           break;
         case 2:
