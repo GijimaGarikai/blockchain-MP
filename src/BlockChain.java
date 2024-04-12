@@ -13,10 +13,9 @@ public class BlockChain {
   // | Fields |
   // +--------+
  
-  Node first;
-  Node last;
-  int numBlocks = 0;
-  int blockNum = 0;
+  private Node first;
+  private Node last;
+  private int numBlocks = 0;
 
   // +--------------+----------------------------------------------------
   // | Constructors |
@@ -151,7 +150,7 @@ public class BlockChain {
     while(currNode != null){
       balance += currNode.data.getAmount();
 
-      if(balance < 0 || !currNode.data.currHash.isValid()) {
+      if(balance < 0 || !currNode.data.getHash().isValid()) {
         return -1;
       } // if
       currNode = currNode.next;

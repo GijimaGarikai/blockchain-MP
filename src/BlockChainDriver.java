@@ -28,6 +28,7 @@ public class BlockChainDriver {
 
   public static void main(String[] args) {
     PrintWriter pen = new PrintWriter(System.out, true);
+    pen.println("Welcome! Type the given commands into the command line and enjoy this blockchain simulator!");
     if (args.length != 1 || !isNumeric(args[0])) {
       return;
     }
@@ -40,12 +41,19 @@ public class BlockChainDriver {
       pen.println(blkchain.toString());
       pen.println("Command? ");
       curLine = eyes.nextLine();
-      executeCommand(blkchain, comList.indexOf(curLine), pen, eyes);
+      int command = comList.indexOf(curLine);
+      if (command < 0) {
+        pen.println("'" + curLine + "'" + " is an invalid command. Try again");
+        continue;
+      }
+      executeCommand(blkchain, command, pen, eyes);
     }
 
   }
 
-  // add docs
+  /* isNumeric(String str)
+   * checks if a string is numeric
+   */
   public static boolean isNumeric(String str) {
     try {  
       Integer.parseInt(str);  
@@ -53,8 +61,12 @@ public class BlockChainDriver {
     } catch(NumberFormatException e){  
       return false;  
     } 
-  }
+  } // isNumeric(String str)
 
+
+  /* printMenu(PrintWriter pen)
+   * prints menu
+   */
   private static void printMenu(PrintWriter pen) {
     pen.println("Valid commands: \n" +
     "\t append: appends a new block onto the end of the chain\n" +
@@ -63,8 +75,11 @@ public class BlockChainDriver {
     "\t report: reports the balances of Alexis and Blake\n" +
     "\t help: prints this list of commands\n" +
     "\t quit: quits the program");
-  }
+  } // printMenu(PrintWriter pen)
 
+  /* executeCommand(BlockChain blkchain, int command, PrintWriter pen, Scanner eyes)
+   * executes given command
+   */
   private static void executeCommand(BlockChain blkchain, int command, PrintWriter pen, Scanner eyes) {
     switch(command) {
         case 0:
@@ -72,7 +87,7 @@ public class BlockChainDriver {
           int amt0 = Integer.parseInt(eyes.nextLine());
           Block currBlock = blkchain.mine(amt0);
           pen.println("amount = " + amt0 + ", nonce = " + currBlock.getNonce()+"\n");
-          break;
+          break; // case 0 | mine
         case 1:
           pen.println("Amount transferred? ");
           int amt1 = Integer.parseInt(eyes.nextLine());
@@ -83,40 +98,40 @@ public class BlockChainDriver {
             blkchain.append(newBlock);
           } catch (Exception e) {
             pen.println("Invalid Hash/Block");
-          }
+          } // try-catch
           pen.println("\n");
-          break;
+          break; // case 1 | append
         case 2:
         if (blkchain.removeLast()) {
             pen.println("Last item removed!\n");
-          }
+          } // if
           else {
             pen.println("Removal failed!\n");
-          }
+          } // else
           
-          break;
+          break; // case 2 | remove
         case 3:
           if (blkchain.isValidBlockChain()) {
             pen.println("Chain is valid!\n");
-          }
+          } // if
           else {
             pen.println("Chain is not valid!\n");
-          }
-          break;
+          } // else
+          break; // case 3 | check
         case 4:
           blkchain.printBalances(pen);
           pen.println("\n");
-          break;
+          break; // case 4 | report
         case 5:
           printMenu(pen);
           pen.println("\n");
-          break;
+          break; // case 5 | help
         case 6:
           pen.println("Program terminated\n");
           System.exit(0);
-          break;
-    }
-  }
+          break; // case 6 | quit
+    } // switch
+  } // executeCommand(BlockChain blkchain, int command, PrintWriter pen, Scanner eyes)
 
   
-}
+} 

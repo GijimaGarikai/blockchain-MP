@@ -14,11 +14,11 @@ public class Block {
   // | Fields |
   // +--------+
  
-  int blockNum;
-  int amountTransferred; 
-  long nonce;
-  Hash prevHash;
-  Hash currHash;
+  private int blockNum;
+  private int amountTransferred; 
+  private long nonce;
+  private Hash prevHash;
+  private Hash currHash;
 
   // +--------------+----------------------------------------------------
   // | Constructors |
